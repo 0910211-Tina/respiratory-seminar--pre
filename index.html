@@ -24,28 +24,34 @@ body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingF
 .btn:active{opacity:.85}
 .btn-green{background:#5fa87a;color:white}
 .btn-sage{background:#8aaa80;color:white}
-.schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow-x:auto;margin:0 0 14px}
-table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
-thead th{background:#f2f4f0;color:#555;font-weight:bold;padding:9px 8px;text-align:center;border-bottom:1px solid #e5e5e5;font-size:14px}
-th:nth-child(1){width:22%}
-th:nth-child(2){width:46%}
-th:nth-child(3){width:32%}
-td{padding:9px 8px;border-bottom:1px solid #f0f0f0;vertical-align:middle;line-height:1.6;word-break:break-all}
+
+/* ── 課程表 ── */
+.schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px}
+table{width:100%;min-width:480px;border-collapse:collapse;font-size:14px}
+thead th{background:#f2f4f0;color:#555;font-weight:bold;padding:10px 10px;text-align:center;border-bottom:1px solid #e5e5e5;white-space:nowrap}
+td{padding:10px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle;line-height:1.65}
 tr:last-child td{border-bottom:none}
-.td-time{color:#1a1a1a;font-size:13px;text-align:center}
-.td-topic{color:#1a3a6b;font-weight:500;font-size:14px}
-.td-speaker{color:#1a1a1a;font-size:13px;text-align:right}
+
+.td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap;width:90px}
+.td-topic{color:#1a3a6b;font-weight:500}
+.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;white-space:nowrap}
+
 .row-chair{background:#f5f8f2}
-.row-chair td{font-size:14px;color:#5a7a50;font-weight:bold;text-align:center;padding:7px 8px}
-.row-break td{color:#aaa;text-align:center;font-size:14px;background:#fafafa}
+.row-chair td{font-size:13px;color:#5a7a50;font-weight:bold;text-align:center;padding:8px 10px}
+
+/* 休息/午休/簽到 列：時間黑色，內容深藍 */
+.row-break .td-time{color:#1a1a1a}
+.row-break td:not(.td-time){color:#1a3a6b;text-align:center;background:#fafafa;font-size:14px}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="org">台灣呼吸治療學會</div>
   <h1>115.06.06<br>初階重症學術研討會</h1>
   <span class="phase-pill">課前必完成</span>
 </div>
+
 <div class="section-title">01 · 前測</div>
 <div class="item">
   <div class="item-top">
@@ -58,6 +64,7 @@ tr:last-child td{border-bottom:none}
   </div>
   <a class="btn btn-green" href="https://reurl.cc/lpj6O9" target="_blank">前往填寫前測 →</a>
 </div>
+
 <div class="section-title">02 · 課程講義</div>
 <div class="item">
   <div class="item-top">
@@ -70,30 +77,88 @@ tr:last-child td{border-bottom:none}
   </div>
   <a class="btn btn-sage" href="https://reurl.cc/yOj4Vl" target="_blank">前往課程講義 →</a>
 </div>
+
 <div class="section-title">03 · 課程表</div>
 <div class="schedule-wrap">
   <table>
-    <thead><tr><th>時間</th><th>講題</th><th>主講者</th></tr></thead>
+    <thead>
+      <tr><th>時間</th><th>講題</th><th>主講者</th></tr>
+    </thead>
     <tbody>
-      <tr><td class="td-time">08:00–08:30</td><td class="td-topic" style="color:#5c3317">報到</td><td class="td-speaker">曾筠婷 監事</td></tr>
-      <tr><td class="td-time">08:30–09:00</td><td class="td-topic" colspan="2" style="text-align:center">學前測試及課程說明</td></tr>
+      <tr>
+        <td class="td-time">08:00–08:30</td>
+        <td class="td-topic">報到</td>
+        <td class="td-speaker">曾筠婷 監事</td>
+      </tr>
+      <tr>
+        <td class="td-time">08:30–09:00</td>
+        <td class="td-topic" colspan="2" style="text-align:center">學前測試及課程說明</td>
+      </tr>
       <tr class="row-chair"><td colspan="3">座長：台灣呼吸治療學會　譚美珠 理事</td></tr>
-      <tr><td class="td-time">09:00–09:50</td><td class="td-topic">重症病人鎮靜劑與止痛劑的臨床應用</td><td class="td-speaker">臺大醫院 呼吸診療科<br>王瑋湞 呼吸治療師</td></tr>
-      <tr class="row-break"><td class="td-time">09:50–10:10</td><td colspan="2">休　息</td></tr>
-      <tr><td class="td-time">10:10–11:00</td><td class="td-topic">重症病人之呼吸照護</td><td class="td-speaker">國軍左營總醫院 胸腔內科<br>蘇博民 呼吸治療師</td></tr>
-      <tr><td class="td-time">11:00–11:50</td><td class="td-topic">重症病人疾病嚴重度的評估</td><td class="td-speaker">臺大醫院 呼吸診療科<br>廖庭淯 主治醫師</td></tr>
-      <tr class="row-break"><td class="td-time">11:50–12:50</td><td colspan="2">午　休</td></tr>
-      <tr class="row-break"><td class="td-time">12:50–13:10</td><td colspan="2">簽　到</td></tr>
+      <tr>
+        <td class="td-time">09:00–09:50</td>
+        <td class="td-topic">重症病人鎮靜劑與止痛劑的臨床應用</td>
+        <td class="td-speaker">臺大醫院 呼吸診療科<br>王瑋湞 呼吸治療師</td>
+      </tr>
+      <tr class="row-break">
+        <td class="td-time">09:50–10:10</td>
+        <td colspan="2">休　息</td>
+      </tr>
+      <tr>
+        <td class="td-time">10:10–11:00</td>
+        <td class="td-topic">重症病人之呼吸照護</td>
+        <td class="td-speaker">國軍左營總醫院 胸腔內科<br>蘇博民 呼吸治療師</td>
+      </tr>
+      <tr>
+        <td class="td-time">11:00–11:50</td>
+        <td class="td-topic">重症病人疾病嚴重度的評估</td>
+        <td class="td-speaker">臺大醫院 呼吸診療科<br>廖庭淯 主治醫師</td>
+      </tr>
+      <tr class="row-break">
+        <td class="td-time">11:50–12:50</td>
+        <td colspan="2">午　休</td>
+      </tr>
+      <tr class="row-break">
+        <td class="td-time">12:50–13:10</td>
+        <td colspan="2">簽　到</td>
+      </tr>
       <tr class="row-chair"><td colspan="3">座長：台灣呼吸治療學會　張哲榕 理事</td></tr>
-      <tr><td class="td-time">13:10–14:00</td><td class="td-topic">重症病人營養照護之認識</td><td class="td-speaker">臺大醫院 呼吸診療科<br>辛明翰 呼吸治療師</td></tr>
-      <tr><td class="td-time">14:00–14:50</td><td class="td-topic">體液與電解質異常的評估</td><td class="td-speaker">敏盛綜合醫院 胸腔內科<br>陳育萱 主治醫師</td></tr>
-      <tr class="row-break"><td class="td-time">14:50–15:10</td><td colspan="2">休　息</td></tr>
-      <tr><td class="td-time">15:10–16:00</td><td class="td-topic">腦神經外科手術後病人的呼吸照護</td><td class="td-speaker">三軍總醫院 胸腔內科<br>李天琪 呼吸治療師</td></tr>
-      <tr><td class="td-time">16:00–16:50</td><td class="td-topic">成人胸腔及心臟手術後病人的呼吸照護</td><td class="td-speaker">亞東紀念醫院 胸腔內科<br>汪怡君 呼吸治療師</td></tr>
-      <tr class="row-break"><td class="td-time">16:50–17:30</td><td colspan="2" style="color:#5c3317">學後測試及課後評值</td></tr>
-      <tr><td class="td-time">17:30–</td><td class="td-topic" style="color:#5c3317">簽退與歸賦</td><td class="td-speaker">曾筠婷 監事</td></tr>
+      <tr>
+        <td class="td-time">13:10–14:00</td>
+        <td class="td-topic">重症病人營養照護之認識</td>
+        <td class="td-speaker">臺大醫院 呼吸診療科<br>辛明翰 呼吸治療師</td>
+      </tr>
+      <tr>
+        <td class="td-time">14:00–14:50</td>
+        <td class="td-topic">體液與電解質異常的評估</td>
+        <td class="td-speaker">敏盛綜合醫院 胸腔內科<br>陳育萱 主治醫師</td>
+      </tr>
+      <tr class="row-break">
+        <td class="td-time">14:50–15:10</td>
+        <td colspan="2">休　息</td>
+      </tr>
+      <tr>
+        <td class="td-time">15:10–16:00</td>
+        <td class="td-topic">腦神經外科手術後病人的呼吸照護</td>
+        <td class="td-speaker">三軍總醫院 胸腔內科<br>李天琪 呼吸治療師</td>
+      </tr>
+      <tr>
+        <td class="td-time">16:00–16:50</td>
+        <td class="td-topic">成人胸腔及心臟手術後病人的呼吸照護</td>
+        <td class="td-speaker">亞東紀念醫院 胸腔內科<br>汪怡君 呼吸治療師</td>
+      </tr>
+      <tr class="row-break">
+        <td class="td-time">16:50–17:30</td>
+        <td colspan="2">學後測試及課後評值</td>
+      </tr>
+      <tr>
+        <td class="td-time">17:30–</td>
+        <td class="td-topic">簽退與歸賦</td>
+        <td class="td-speaker">曾筠婷 監事</td>
+      </tr>
     </tbody>
   </table>
 </div>
+
 </body>
 </html>
