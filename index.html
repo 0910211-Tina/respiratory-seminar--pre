@@ -27,13 +27,16 @@ body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingF
 
 /* ── 課程表（桌機）── */
 .schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow:hidden;margin:0 0 14px}
-table{width:100%;border-collapse:collapse;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
 thead th{background:#f2f4f0;color:#555;font-weight:bold;padding:10px 10px;text-align:center;border-bottom:1px solid #e5e5e5;white-space:nowrap}
+th:nth-child(1){width:90px}
+th:nth-child(2){width:auto}
+th:nth-child(3){width:170px}
 td{padding:10px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle;line-height:1.65}
 tr:last-child td{border-bottom:none}
 .td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap;width:95px}
 .td-topic{color:#1a3a6b;font-weight:500}
-.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;width:130px}
+.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;width:170px;word-break:keep-all}
 .row-chair{background:#f5f8f2}
 .row-chair td{font-size:13px;color:#5a7a50;font-weight:bold;text-align:center;padding:8px 10px}
 .row-break .td-time{color:#1a1a1a}
