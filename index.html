@@ -7,7 +7,7 @@
 <style>
 :root{color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;background:#f8f7f4;color:#3a3a3a;padding:20px 14px 52px}
+body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;background:#f8f7f4;color:#3a3a3a;padding:20px 6px 52px;max-width:780px;margin:0 auto}
 .header{text-align:center;margin-bottom:28px}
 .header .org{font-size:14px;color:#aaa;letter-spacing:1px;margin-bottom:8px}
 .header h1{font-size:22px;font-weight:bold;color:#2e2e2e;line-height:1.7;margin-bottom:10px}
@@ -25,23 +25,37 @@ body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingF
 .btn-green{background:#5fa87a;color:white}
 .btn-sage{background:#8aaa80;color:white}
 
-/* ── 課程表 ── */
-.schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px}
-table{width:100%;min-width:480px;border-collapse:collapse;font-size:14px}
+/* ── 課程表（桌機）── */
+.schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow:hidden;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
 thead th{background:#f2f4f0;color:#555;font-weight:bold;padding:10px 10px;text-align:center;border-bottom:1px solid #e5e5e5;white-space:nowrap}
 td{padding:10px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle;line-height:1.65}
 tr:last-child td{border-bottom:none}
-
-.td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap;width:90px}
+.td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap;width:95px}
 .td-topic{color:#1a3a6b;font-weight:500}
-.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;white-space:nowrap}
-
+.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;width:130px}
 .row-chair{background:#f5f8f2}
 .row-chair td{font-size:13px;color:#5a7a50;font-weight:bold;text-align:center;padding:8px 10px}
-
-/* 休息/午休/簽到 列：時間黑色，內容深藍 */
 .row-break .td-time{color:#1a1a1a}
 .row-break td:not(.td-time){color:#1a3a6b;text-align:center;background:#fafafa;font-size:14px}
+
+/* ── 手機排版（≤600px）── */
+@media(max-width:600px){
+  .schedule-wrap{border-radius:10px}
+  table,tbody,tr{display:block;width:100%}
+  thead{display:none}
+  tr{border-bottom:1px solid #ececec;padding:10px 14px}
+  tr:last-child{border-bottom:none}
+  td{display:block;padding:0;border:none;text-align:left !important;background:transparent !important;white-space:normal !important;width:auto !important}
+  .td-time{font-size:12px;color:#1a1a1a;margin-bottom:3px}
+  .td-topic{font-size:15px;color:#1a3a6b;font-weight:bold;line-height:1.5;margin-bottom:4px}
+  .td-speaker{font-size:12px;color:#666;line-height:1.5}
+  .row-chair{background:#f5f8f2}
+  .row-chair td{font-size:13px;color:#5a7a50;font-weight:bold;text-align:center !important;padding:8px 0}
+  .row-break{background:#fafafa}
+  .row-break td{font-size:13px;color:#1a3a6b;padding:2px 0}
+  .row-break .td-time{color:#1a1a1a}
+}
 </style>
 </head>
 <body>
