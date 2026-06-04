@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f7f4">
+<link rel="manifest" href="/manifest.json">
 <title>課前 | 115.06.06 初階重症學術研討會</title>
 <style>
 :root{color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;background:#f8f7f4;color:#3a3a3a;padding:20px 6px 52px;min-width:480px;margin:0 auto}
+body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;background:#f8f7f4;color:#3a3a3a;padding:20px 6px 100px;max-width:630px;margin:0 auto}
 .header{text-align:center;margin-bottom:28px}
 .header .org{font-size:14px;color:#aaa;letter-spacing:1px;margin-bottom:8px}
 .header h1{font-size:22px;font-weight:bold;color:#2e2e2e;line-height:1.7;margin-bottom:10px}
@@ -24,8 +26,9 @@ body{font-family:"Times New Roman","Microsoft JhengHei","微軟正黑體","PingF
 .btn:active{opacity:.85}
 .btn-green{background:#5fa87a;color:white}
 .btn-sage{background:#8aaa80;color:white}
+.btn-hint{text-align:center;font-size:12px;color:#aaa;margin-top:7px}
 
-/* ── 課程表（桌機）── */
+/* ── 課程表 ── */
 .schedule-wrap{background:white;border-radius:14px;border:1px solid #ebebeb;overflow:hidden;margin:0 0 14px}
 table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
 thead th{background:#f2f4f0;color:#555;font-weight:bold;padding:10px 10px;text-align:center;border-bottom:1px solid #e5e5e5;white-space:nowrap}
@@ -34,15 +37,27 @@ th:nth-child(2){width:auto}
 th:nth-child(3){width:170px}
 td{padding:10px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle;line-height:1.65}
 tr:last-child td{border-bottom:none}
-.td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap;width:95px}
+.td-time{color:#1a1a1a;font-size:13px;text-align:center;white-space:nowrap}
 .td-topic{color:#1a3a6b;font-weight:500}
-.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;width:170px;word-break:keep-all}
+.td-speaker{color:#1a1a1a;font-size:13px;text-align:right;word-break:keep-all}
 .row-chair{background:#f5f8f2}
 .row-chair td{font-size:13px;color:#5a7a50;font-weight:bold;text-align:center;padding:8px 10px}
 .row-break .td-time{color:#1a1a1a}
 .row-break td:not(.td-time){color:#1a3a6b;text-align:center;background:#fafafa;font-size:14px}
 
-/* ── 手機排版（≤600px）── */
+/* ── 回來提示 Toast ── */
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:#2e7d62;color:white;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:bold;z-index:999;transition:transform 0.4s ease;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── 底部書籤橫幅 ── */
+#bookmark-bar{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5e5e5;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:998;box-shadow:0 -2px 12px rgba(0,0,0,0.07)}
+#bookmark-bar.hidden{display:none}
+.bk-text{font-size:13px;color:#444;line-height:1.5}
+.bk-text strong{color:#1a3a6b}
+.bk-btn{font-size:13px;font-weight:bold;color:white;background:#5fa87a;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;margin-left:12px}
+.bk-close{font-size:18px;color:#aaa;background:none;border:none;cursor:pointer;padding:0 4px;margin-left:8px}
+
+/* ── 手機排版 ── */
 @media(max-width:600px){
   .schedule-wrap{border-radius:10px}
   table,tbody,tr{display:block;width:100%}
@@ -63,6 +78,18 @@ tr:last-child td{border-bottom:none}
 </head>
 <body>
 
+<!-- 回來提示 -->
+<div id="toast">✅ 歡迎回來！可繼續填寫下一項目</div>
+
+<!-- 底部書籤橫幅 -->
+<div id="bookmark-bar">
+  <div class="bk-text">📌 <strong>加入書籤</strong>，下次不用重新掃碼</div>
+  <div style="display:flex;align-items:center">
+    <button class="bk-btn" onclick="addBookmark()">加入書籤</button>
+    <button class="bk-close" onclick="dismissBar()" aria-label="關閉">×</button>
+  </div>
+</div>
+
 <div class="header">
   <div class="org">台灣呼吸治療學會</div>
   <h1>115.06.06<br>初階重症學術研討會</h1>
@@ -80,6 +107,7 @@ tr:last-child td{border-bottom:none}
     非於現場考試期間作答不計分
   </div>
   <a class="btn btn-green" href="https://reurl.cc/lpj6O9" target="_blank">前往填寫前測 →</a>
+  <p class="btn-hint">填寫完畢後切換回此頁即可</p>
 </div>
 
 <div class="section-title">02 · 課程講義</div>
@@ -93,6 +121,7 @@ tr:last-child td{border-bottom:none}
     完訓證書約完訓後一個月左右可下載，詳細時間另行公告。
   </div>
   <a class="btn btn-sage" href="https://reurl.cc/yOj4Vl" target="_blank">前往課程講義 →</a>
+  <p class="btn-hint">填寫完畢後切換回此頁即可</p>
 </div>
 
 <div class="section-title">03 · 課程表</div>
@@ -102,80 +131,56 @@ tr:last-child td{border-bottom:none}
       <tr><th>時間</th><th>講題</th><th>主講者</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="td-time">08:00–08:30</td>
-        <td class="td-topic">報到</td>
-        <td class="td-speaker">曾筠婷 監事</td>
-      </tr>
-      <tr>
-        <td class="td-time">08:30–09:00</td>
-        <td class="td-topic" colspan="2" style="text-align:center">學前測試及課程說明</td>
-      </tr>
+      <tr><td class="td-time">08:00–08:30</td><td class="td-topic">報到</td><td class="td-speaker">曾筠婷 監事</td></tr>
+      <tr><td class="td-time">08:30–09:00</td><td class="td-topic" colspan="2" style="text-align:center">學前測試及課程說明</td></tr>
       <tr class="row-chair"><td colspan="3">座長：台灣呼吸治療學會　譚美珠 理事</td></tr>
-      <tr>
-        <td class="td-time">09:00–09:50</td>
-        <td class="td-topic">重症病人鎮靜劑與止痛劑的臨床應用</td>
-        <td class="td-speaker">臺大醫院 呼吸診療科<br>王瑋湞 呼吸治療師</td>
-      </tr>
-      <tr class="row-break">
-        <td class="td-time">09:50–10:10</td>
-        <td colspan="2">休　息</td>
-      </tr>
-      <tr>
-        <td class="td-time">10:10–11:00</td>
-        <td class="td-topic">重症病人之呼吸照護</td>
-        <td class="td-speaker">國軍左營總醫院 胸腔內科<br>蘇博民 呼吸治療師</td>
-      </tr>
-      <tr>
-        <td class="td-time">11:00–11:50</td>
-        <td class="td-topic">重症病人疾病嚴重度的評估</td>
-        <td class="td-speaker">臺大醫院 呼吸診療科<br>廖庭淯 主治醫師</td>
-      </tr>
-      <tr class="row-break">
-        <td class="td-time">11:50–12:50</td>
-        <td colspan="2">午　休</td>
-      </tr>
-      <tr class="row-break">
-        <td class="td-time">12:50–13:10</td>
-        <td colspan="2">簽　到</td>
-      </tr>
+      <tr><td class="td-time">09:00–09:50</td><td class="td-topic">重症病人鎮靜劑與止痛劑的臨床應用</td><td class="td-speaker">臺大醫院 呼吸診療科<br>王瑋湞 呼吸治療師</td></tr>
+      <tr class="row-break"><td class="td-time">09:50–10:10</td><td colspan="2">休　息</td></tr>
+      <tr><td class="td-time">10:10–11:00</td><td class="td-topic">重症病人之呼吸照護</td><td class="td-speaker">國軍左營總醫院 胸腔內科<br>蘇博民 呼吸治療師</td></tr>
+      <tr><td class="td-time">11:00–11:50</td><td class="td-topic">重症病人疾病嚴重度的評估</td><td class="td-speaker">臺大醫院 呼吸診療科<br>廖庭淯 主治醫師</td></tr>
+      <tr class="row-break"><td class="td-time">11:50–12:50</td><td colspan="2">午　休</td></tr>
+      <tr class="row-break"><td class="td-time">12:50–13:10</td><td colspan="2">簽　到</td></tr>
       <tr class="row-chair"><td colspan="3">座長：台灣呼吸治療學會　張哲榕 理事</td></tr>
-      <tr>
-        <td class="td-time">13:10–14:00</td>
-        <td class="td-topic">重症病人營養照護之認識</td>
-        <td class="td-speaker">臺大醫院 呼吸診療科<br>辛明翰 呼吸治療師</td>
-      </tr>
-      <tr>
-        <td class="td-time">14:00–14:50</td>
-        <td class="td-topic">體液與電解質異常的評估</td>
-        <td class="td-speaker">敏盛綜合醫院 胸腔內科<br>陳育萱 主治醫師</td>
-      </tr>
-      <tr class="row-break">
-        <td class="td-time">14:50–15:10</td>
-        <td colspan="2">休　息</td>
-      </tr>
-      <tr>
-        <td class="td-time">15:10–16:00</td>
-        <td class="td-topic">腦神經外科手術後病人的呼吸照護</td>
-        <td class="td-speaker">三軍總醫院 胸腔內科<br>李天琪 呼吸治療師</td>
-      </tr>
-      <tr>
-        <td class="td-time">16:00–16:50</td>
-        <td class="td-topic">成人胸腔及心臟手術後病人的呼吸照護</td>
-        <td class="td-speaker">亞東紀念醫院 胸腔內科<br>汪怡君 呼吸治療師</td>
-      </tr>
-      <tr class="row-break">
-        <td class="td-time">16:50–17:30</td>
-        <td colspan="2">學後測試及課後評值</td>
-      </tr>
-      <tr>
-        <td class="td-time">17:30–</td>
-        <td class="td-topic">簽退與歸賦</td>
-        <td class="td-speaker">曾筠婷 監事</td>
-      </tr>
+      <tr><td class="td-time">13:10–14:00</td><td class="td-topic">重症病人營養照護之認識</td><td class="td-speaker">臺大醫院 呼吸診療科<br>辛明翰 呼吸治療師</td></tr>
+      <tr><td class="td-time">14:00–14:50</td><td class="td-topic">體液與電解質異常的評估</td><td class="td-speaker">敏盛綜合醫院 胸腔內科<br>陳育萱 主治醫師</td></tr>
+      <tr class="row-break"><td class="td-time">14:50–15:10</td><td colspan="2">休　息</td></tr>
+      <tr><td class="td-time">15:10–16:00</td><td class="td-topic">腦神經外科手術後病人的呼吸照護</td><td class="td-speaker">三軍總醫院 胸腔內科<br>李天琪 呼吸治療師</td></tr>
+      <tr><td class="td-time">16:00–16:50</td><td class="td-topic">成人胸腔及心臟手術後病人的呼吸照護</td><td class="td-speaker">亞東紀念醫院 胸腔內科<br>汪怡君 呼吸治療師</td></tr>
+      <tr class="row-break"><td class="td-time">16:50–17:30</td><td colspan="2">學後測試及課後評值</td></tr>
+      <tr><td class="td-time">17:30–</td><td class="td-topic">簽退與歸賦</td><td class="td-speaker">曾筠婷 監事</td></tr>
     </tbody>
   </table>
 </div>
 
+<script>
+// 書籤橫幅
+if(sessionStorage.getItem('bk_dismissed')){
+  document.getElementById('bookmark-bar').classList.add('hidden');
+}
+function dismissBar(){
+  document.getElementById('bookmark-bar').classList.add('hidden');
+  sessionStorage.setItem('bk_dismissed','1');
+}
+function addBookmark(){
+  if(navigator.share){
+    navigator.share({title:document.title,url:location.href});
+  } else {
+    alert('請按 Ctrl+D（電腦）或使用瀏覽器選單「加入書籤／加入主畫面」');
+  }
+  dismissBar();
+}
+
+// 回來偵測
+var _left=false;
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){ _left=true; }
+  else if(_left){
+    _left=false;
+    var t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); },3500);
+  }
+});
+</script>
 </body>
 </html>
